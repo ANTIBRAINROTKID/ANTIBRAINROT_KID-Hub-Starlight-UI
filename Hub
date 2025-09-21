@@ -1,346 +1,406 @@
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
+local Starlight = loadstring(game:HttpGet("https://raw.nebulasoftworks.xyz/starlight"))()  
 
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local NebulaIcons = loadstring(game:HttpGet("https://raw.nebulasoftworks.xyz/nebula-icon-library-loader"))()
+local Window = Starlight:CreateWindow({
+    Name = "ANTIBRAINROT_KID HUB",
+    Subtitle = "discord.gg/FurMVU3cPc",
+    Icon = 74316715503333,
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "antibrara"
-gui.ResetOnSpawn = false
-gui.Parent = playerGui
+    LoadingSettings = {
+        Title = "My Script Hub",
+        Subtitle = "Welcome to My Script Hub",
+    },
 
-local mainFrame = Instance.new("Frame")
-mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 450, 0, 350)
-mainFrame.Position = UDim2.new(0.5, -225, 0.5, -175)
-mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-mainFrame.BackgroundColor3 = Color3.fromRGB(220, 220, 220)
-mainFrame.BorderSizePixel = 0
-mainFrame.ClipsDescendants = true
-mainFrame.Parent = gui
+    FileSettings = {
+        ConfigFolder = "MyScript"
+    },
+})
 
-local backgroundImage = Instance.new("ImageLabel")
-backgroundImage.Size = UDim2.new(1, 0, 1, 0)
-backgroundImage.Image = "rbxassetid://113811158122751"
-backgroundImage.ImageTransparency = 0.85
-backgroundImage.ScaleType = Enum.ScaleType.Crop
-backgroundImage.BackgroundTransparency = 1
-backgroundImage.Parent = mainFrame
+local Notifications = Starlight:Notification({
+    Title = "Script Loaded!",
+    Icon = NebulaIcons:GetIcon('sparkle', 'Material'),
+    Content = "Enjoy!",
+}, "INDEX")
 
-local titleBar = Instance.new("Frame")
-titleBar.Name = "TitleBar"
-titleBar.Size = UDim2.new(1, 0, 0, 30)
-titleBar.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
-titleBar.BorderSizePixel = 0
-titleBar.Parent = mainFrame
+local Dialog = Window:PromptDialog({
+    Name = "Hey!",
+    Content = "Thank you for using my script!)",
+    Type = 1,
+    Actions = { 
+        Primary = {
+            Name = "Okay!",
+            Icon = NebulaIcons:GetIcon("check", "Material"),
+            Callback = function()
 
-local title = Instance.new("TextLabel")
-title.Name = "Title"
-title.Size = UDim2.new(1, -30, 1, 0)
-title.Position = UDim2.new(0, 10, 0, 0)
-title.BackgroundTransparency = 1
-title.Text = "Choose A UI"
-title.TextColor3 = Color3.fromRGB(50, 50, 50)
-title.TextXAlignment = Enum.TextXAlignment.Center
-title.Font = Enum.Font.GothamSemibold
-title.TextSize = 20
-title.Parent = titleBar
-
-local closeButton = Instance.new("TextButton")
-closeButton.Name = "CloseButton"
-closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -30, 0, 0)
-closeButton.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
-closeButton.BorderSizePixel = 0
-closeButton.Text = "×"
-closeButton.TextColor3 = Color3.fromRGB(50, 50, 50)
-closeButton.Font = Enum.Font.GothamBold
-closeButton.TextSize = 16
-closeButton.Parent = titleBar
-
-local tabsFrame = Instance.new("Frame")
-tabsFrame.Name = "TabsFrame"
-tabsFrame.Size = UDim2.new(1, 0, 0, 35)
-tabsFrame.Position = UDim2.new(0, 0, 0, 30)
-tabsFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-tabsFrame.BorderSizePixel = 0
-tabsFrame.Parent = mainFrame
-
-local tabsContainer = Instance.new("Frame")
-tabsContainer.Name = "TabsContainer"
-tabsContainer.Size = UDim2.new(1, 0, 1, 0)
-tabsContainer.BackgroundTransparency = 1
-tabsContainer.Parent = tabsFrame
-
-local tabsLayout = Instance.new("UIListLayout")
-tabsLayout.FillDirection = Enum.FillDirection.Horizontal
-tabsLayout.Padding = UDim.new(0, 0)
-tabsLayout.Parent = tabsContainer
-
-local contentFrame = Instance.new("Frame")
-contentFrame.Name = "ContentFrame"
-contentFrame.Size = UDim2.new(1, 0, 1, -65)
-contentFrame.Position = UDim2.new(0, 0, 0, 65)
-contentFrame.BackgroundTransparency = 1
-contentFrame.BorderSizePixel = 0
-contentFrame.Parent = mainFrame
-
-local function copyToClipboard(text)
-    local clipBoard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
-    if clipBoard then clipBoard(text) end
-end
-
-local tabs = {}
-local currentTab = nil
-
-local function createTab(tabName)
-    local tabButton = Instance.new("TextButton")
-    tabButton.Name = tabName
-    tabButton.Size = UDim2.new(0, 90, 1, 0)
-    tabButton.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
-    tabButton.BorderSizePixel = 0
-    tabButton.Text = tabName
-    tabButton.TextColor3 = Color3.fromRGB(80, 80, 80)
-    tabButton.Font = Enum.Font.Gotham
-    tabButton.TextSize = 12
-    tabButton.Parent = tabsContainer
-    
-    local tabContent = Instance.new("ScrollingFrame")
-    tabContent.Name = tabName
-    tabContent.Size = UDim2.new(1, 0, 1, 0)
-    tabContent.BackgroundTransparency = 1
-    tabContent.Visible = false
-    tabContent.BorderSizePixel = 0
-    tabContent.ScrollBarThickness = 4
-    tabContent.ScrollBarImageColor3 = Color3.fromRGB(150, 150, 150)
-    tabContent.AutomaticCanvasSize = Enum.AutomaticSize.Y
-    tabContent.Parent = contentFrame
-    
-    local tabGrid = Instance.new("UIGridLayout")
-    tabGrid.CellSize = UDim2.new(0.51, -10, 0, 280)
-    tabGrid.CellPadding = UDim2.new(0, 5, 0, 10)
-    tabGrid.StartCorner = Enum.StartCorner.TopLeft
-    tabGrid.FillDirection = Enum.FillDirection.Horizontal
-    tabGrid.FillDirectionMaxCells = 3
-    tabGrid.Parent = tabContent
-    
-    tabs[tabName] = {button = tabButton, content = tabContent}
-    
-    tabButton.MouseButton1Click:Connect(function()
-        for tabName, tabData in pairs(tabs) do
-            tabData.content.Visible = false
-            tabData.button.BackgroundColor3 = Color3.fromRGB(190, 190, 190)
-            tabData.button.TextColor3 = Color3.fromRGB(80, 80, 80)
-        end
-        
-        tabContent.Visible = true
-        tabButton.BackgroundColor3 = Color3.fromRGB(170, 170, 170)
-        tabButton.TextColor3 = Color3.fromRGB(30, 30, 30)
-        currentTab = {button = tabButton, content = tabContent}
-    end)
-    
-    return tabContent
-end
-
-local function tweenColor(object, property, targetColor, duration)
-    local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-    local tween = TweenService:Create(object, tweenInfo, {[property] = targetColor})
-    tween:Play()
-    return tween
-end
-
-local function addButton(tab, buttonName, scriptToExecute)
-    local processedScript = string.gsub(scriptToExecute, "%[%{username%}%]", player.Name)
-    
-    local button = Instance.new("TextButton")
-    button.Name = buttonName
-    button.Size = UDim2.new(0, 150, 0, 50)
-    button.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-    button.BorderSizePixel = 1
-    button.BorderColor3 = Color3.fromRGB(170, 170, 170)
-    button.Text = buttonName
-    button.TextColor3 = Color3.fromRGB(50, 50, 50)
-    button.Font = Enum.Font.GothamMedium
-    button.TextSize = 40
-    button.TextWrapped = true
-    button.AutoButtonColor = false
-    button.Parent = tab
-    
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 6)
-    corner.Parent = button
-    
-    local stroke = Instance.new("UIStroke")
-    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    stroke.Color = Color3.fromRGB(170, 170, 170)
-    stroke.Thickness = 1
-    stroke.Parent = button
-    
-    local isHolding = false
-    local holdStartTime = 0
-    local holdConnection = nil
-    local currentTweens = {}
-
-    local function cancelTweens()
-        for _, tween in pairs(currentTweens) do
-            tween:Cancel()
-        end
-        currentTweens = {}
-    end
-
-    local function applyHoverEffects()
-        cancelTweens()
-        currentTweens[1] = tweenColor(button, "BackgroundColor3", Color3.fromRGB(210, 210, 210), 0.2)
-        currentTweens[2] = tweenColor(stroke, "Color", Color3.fromRGB(140, 140, 140), 0.2)
-    end
-
-    local function applyNormalEffects()
-        cancelTweens()
-        currentTweens[1] = tweenColor(button, "BackgroundColor3", Color3.fromRGB(200, 200, 200), 0.2)
-        currentTweens[2] = tweenColor(stroke, "Color", Color3.fromRGB(170, 170, 170), 0.2)
-    end
-
-    local function applyPressEffects()
-        cancelTweens()
-        currentTweens[1] = tweenColor(button, "BackgroundColor3", Color3.fromRGB(190, 190, 190), 0.1)
-        currentTweens[2] = tweenColor(stroke, "Color", Color3.fromRGB(120, 120, 120), 0.1)
-    end
-
-    local function applyCopyEffects()
-        cancelTweens()
-        currentTweens[1] = tweenColor(button, "BackgroundColor3", Color3.fromRGB(160, 220, 160), 0.2)
-        currentTweens[2] = tweenColor(stroke, "Color", Color3.fromRGB(100, 180, 100), 0.2)
-        
-        task.delay(0.3, function()
-            if button and button.Parent then
-                applyNormalEffects()
             end
-        end)
-    end
-    
-    button.MouseEnter:Connect(function()
-        if not isHolding then
-            applyHoverEffects()
-        end
-    end)
-    
-    button.MouseLeave:Connect(function()
-        if not isHolding then
-            applyNormalEffects()
-        end
-        isHolding = false
-        if holdConnection then
-            holdConnection:Disconnect()
-            holdConnection = nil
-        end
-        cancelTweens()
-    end)
-    
-    button.MouseButton1Down:Connect(function()
-        isHolding = true
-        holdStartTime = tick()
-        applyPressEffects()
-        
-        holdConnection = game:GetService("RunService").Heartbeat:Connect(function()
-            if isHolding and tick() - holdStartTime >= 1.5 then
-                copyToClipboard(processedScript)
-                applyCopyEffects()
-                
-                isHolding = false
-                if holdConnection then
-                    holdConnection:Disconnect()
-                    holdConnection = nil
-                end
+        }, 
+        {
+            Name = "Cancel",
+            Callback = function()
+
             end
-        end)
-    end)
-    
-    button.MouseButton1Up:Connect(function()
-        if isHolding then
-            local holdTime = tick() - holdStartTime
-            if holdTime < 1.5 then
-                applyNormalEffects()
-                loadstring(processedScript)()
-            end
-            isHolding = false
-        end
-        
-        if holdConnection then
-            holdConnection:Disconnect()
-            holdConnection = nil
-        end
-        cancelTweens()
-    end)
-end
+        },
+    }
+})
 
-local visualPage = createTab("UI")
+local TabSection = Window:CreateTabSection("Main")
 
-if tabs["UI"] then
-    tabs["UI"].content.Visible = true
-    tabs["UI"].button.BackgroundColor3 = Color3.fromRGB(170, 170, 170)
-    tabs["UI"].button.TextColor3 = Color3.fromRGB(30, 30, 30)
-    currentTab = tabs["UI"]
-    
-    addButton(visualPage, "Rayfield UI", [[
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ANTIBRAINROTKID/ANTIBRAINROT_KID-Hub/refs/heads/main/Hub"))()
-]])
+local Tab = TabSection:CreateTab({
+    Name = "Main Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
 
-end
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Welcome",
+    Column = 1,
+}, "INDEX")
 
-if tabs["UI"] then
-    tabs["UI"].content.Visible = true
-    tabs["UI"].button.BackgroundColor3 = Color3.fromRGB(170, 170, 170)
-    tabs["UI"].button.TextColor3 = Color3.fromRGB(30, 30, 30)
-    currentTab = tabs["UI"]
-    
-    addButton(visualPage, "Starlight UI", [[
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ANTIBRAINROTKID/ANTIBRAINROT_KID-Hub-Starlight-UI/refs/heads/main/Hub"))()
-]])
+local Label = Groupbox:CreateLabel({
+    Name = "Welcome, user!👋"
+}, "INDEX")
 
-end
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Main Scripts",
+    Column = 1,
+}, "INDEX")
 
-local dragging = false
-local dragStart, startPos
+local Button = Groupbox:CreateButton({
+    Name = "Infinity Yield FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end,
+}, "INDEX")
 
-titleBar.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
-    end
-end)
+local Button = Groupbox:CreateButton({
+    Name = "Nameless Admin",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
+    end,
+}, "INDEX")
 
-titleBar.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        if dragging then
-            local delta = input.Position - dragStart
-            mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-        end
-    end
-end)
+local Button = Groupbox:CreateButton({
+    Name = "System Broken",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+    end,
+}, "INDEX")
 
-UserInputService.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    end
-end)
+local Button = Groupbox:CreateButton({
+    Name = "Invisible FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invisible-script-20557"))()
+    end,
+}, "INDEX")
 
-UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragging = false
-    end
-end)
+local Button = Groupbox:CreateButton({
+    Name = "Free R15 Animation Packs",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Reimagined/refs/heads/main/FE%20Animation%20editor'))()
+    end,
+}, "INDEX")
 
-closeButton.MouseButton1Click:Connect(function()
-    gui:Destroy()
-end)
+local Button = Groupbox:CreateButton({
+    Name = "Chat Bypasser",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/randomizedcomponent/UC/refs/heads/main/3307468c285f4fe535fb5d87b4b053e6.lua"))()
+    end,
+}, "INDEX")
 
-closeButton.MouseEnter:Connect(function()
-    closeButton.BackgroundColor3 = Color3.fromRGB(200, 150, 150)
-end)
+local Button = Groupbox:CreateButton({
+    Name = "LALOL Hub (free backdoor)",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Obunga-666/Lalol-hub-without-hint/refs/heads/main/Lalol%20hub%20without%20hint"))()
+    end,
+}, "INDEX")
 
-closeButton.MouseLeave:Connect(function()
-    closeButton.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
-end)
+local Button = Groupbox:CreateButton({
+    Name = "Fly Gui V3",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Fake Lag",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Biem6ondo/FAKELAG/refs/heads/main/Fakelag"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "AquaMatrix",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Black Hole FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://pastebin.com/raw/wBsi24w3'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Multi Tools",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/MultiToolsV1/main/script"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "RemoteSpy",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Dex",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Keyless-mobile-dex-17888"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Control NPC",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/fe-source/refs/heads/main/NPC/source/main.Luau"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Free R15 Emotes",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Emote-Script-but-Fast-47944"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "CatBypasser",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/shadow62x/catbypass/main/upfix"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Fling All",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/7dfcTWN1'),true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Unnamed ESP",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Other Hubs",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "List of the hubs",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "XVC Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Piw5bqGq"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Wisl Universal Project",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wisl884/wisl-i-Universal-Project1/main/Wisl'i%20Universal%20Project.lua", true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Ph4smo Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/phasmoblade/ph4smo.club/refs/heads/main/universal-hub.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Hat Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/inkdupe/hat-scripts/refs/heads/main/updatedhathub.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Orca Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/richie0866/orca/master/public/snapshot.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Solara Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/samuraa1/Solara-Hub/refs/heads/main/SH.lua'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Skibidi Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/aemos2/Skibidihub/refs/heads/main/SkibidiHUB.txt"))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Game Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "List of the game scripts",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Chilli Hub Steal A Brainrot",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Xhub Murder Mystery 2",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Project Auto V6 Jailbreak autofarm",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('http://scripts.projectauto.xyz/AutoRobV6'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Vertex Murder Mystery 2",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "VoidWare 99 Nights In The Forest",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastefy.app/Nc0I6kCd/raw", true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Ringta Ink Game",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wefwef127382/inkgames.github.io/refs/heads/main/ringta.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "BrookHaven Audio Player",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nmalka01/nmalka01/refs/heads/main/Brookhaven_audio"))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "My Friend Exclusive",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "That made by my friend yeaaaa",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Hitler's Ziga R15",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Xe84a99g"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Condo Emotes R15",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/VR08JLdY"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "ANTIBRAINROT_KID TEAM GUI",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastefy.app/qx7loyDZ/raw"))() 
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Genesis FE Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Genesis FE Scripts",
+    Column = 1,
+}, "INDEX")
+
+local Label = Groupbox:CreateLabel({
+    Name = "You can get it in github: github.com/GenesisFE/Genesis/tree/main/Loadstrings"
+}, "INDEX")
+
+local Label = Groupbox:CreateLabel({
+    Name = "Genesis FE discord: discord.gg/aEZpBEHgMT"
+}, "INDEX")
