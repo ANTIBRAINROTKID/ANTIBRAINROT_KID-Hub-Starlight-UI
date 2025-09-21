@@ -1,0 +1,406 @@
+local Starlight = loadstring(game:HttpGet("https://raw.nebulasoftworks.xyz/starlight"))()  
+
+local NebulaIcons = loadstring(game:HttpGet("https://raw.nebulasoftworks.xyz/nebula-icon-library-loader"))()
+local Window = Starlight:CreateWindow({
+    Name = "ANTIBRAINROT_KID HUB",
+    Subtitle = "discord.gg/FurMVU3cPc",
+    Icon = 74316715503333,
+
+    LoadingSettings = {
+        Title = "My Script Hub",
+        Subtitle = "Welcome to My Script Hub",
+    },
+
+    FileSettings = {
+        ConfigFolder = "MyScript"
+    },
+})
+
+local Notifications = Starlight:Notification({
+    Title = "Script Loaded!",
+    Icon = NebulaIcons:GetIcon('sparkle', 'Material'),
+    Content = "Enjoy!",
+}, "INDEX")
+
+local Dialog = Window:PromptDialog({
+    Name = "Hey!",
+    Content = "Thank you for using my script!)",
+    Type = 1,
+    Actions = { 
+        Primary = {
+            Name = "Okay!",
+            Icon = NebulaIcons:GetIcon("check", "Material"),
+            Callback = function()
+
+            end
+        }, 
+        {
+            Name = "Cancel",
+            Callback = function()
+
+            end
+        },
+    }
+})
+
+local TabSection = Window:CreateTabSection("Main")
+
+local Tab = TabSection:CreateTab({
+    Name = "Main Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Welcome",
+    Column = 1,
+}, "INDEX")
+
+local Label = Groupbox:CreateLabel({
+    Name = "Welcome, user!👋"
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Main Scripts",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Infinity Yield FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Nameless Admin",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "System Broken",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Invisible FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invisible-script-20557"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Free R15 Animation Packs",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Gazer-Ha/Reimagined/refs/heads/main/FE%20Animation%20editor'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Chat Bypasser",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/randomizedcomponent/UC/refs/heads/main/3307468c285f4fe535fb5d87b4b053e6.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "LALOL Hub (free backdoor)",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Obunga-666/Lalol-hub-without-hint/refs/heads/main/Lalol%20hub%20without%20hint"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Fly Gui V3",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Fake Lag",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Biem6ondo/FAKELAG/refs/heads/main/Fakelag"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "AquaMatrix",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ExploitFin/AquaMatrix/refs/heads/AquaMatrix/AquaMatrix"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Black Hole FE",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://pastebin.com/raw/wBsi24w3'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Multi Tools",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/MultiToolsV1/main/script"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "RemoteSpy",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/78n/SimpleSpy/main/SimpleSpySource.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Dex",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Keyless-mobile-dex-17888"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Control NPC",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/fe-source/refs/heads/main/NPC/source/main.Luau"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Free R15 Emotes",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Emote-Script-but-Fast-47944"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "CatBypasser",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/shadow62x/catbypass/main/upfix"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Fling All",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet(('https://pastebin.com/raw/7dfcTWN1'),true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Unnamed ESP",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Other Hubs",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "List of the hubs",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "XVC Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Piw5bqGq"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Wisl Universal Project",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wisl884/wisl-i-Universal-Project1/main/Wisl'i%20Universal%20Project.lua", true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Ph4smo Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/phasmoblade/ph4smo.club/refs/heads/main/universal-hub.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Hat Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/inkdupe/hat-scripts/refs/heads/main/updatedhathub.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Orca Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/richie0866/orca/master/public/snapshot.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Solara Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/samuraa1/Solara-Hub/refs/heads/main/SH.lua'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Skibidi Hub",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/aemos2/Skibidihub/refs/heads/main/SkibidiHUB.txt"))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Game Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "List of the game scripts",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Chilli Hub Steal A Brainrot",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Xhub Murder Mystery 2",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Project Auto V6 Jailbreak autofarm",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet('http://scripts.projectauto.xyz/AutoRobV6'))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Vertex Murder Mystery 2",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "VoidWare 99 Nights In The Forest",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastefy.app/Nc0I6kCd/raw", true))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Ringta Ink Game",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wefwef127382/inkgames.github.io/refs/heads/main/ringta.lua"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "BrookHaven Audio Player",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/nmalka01/nmalka01/refs/heads/main/Brookhaven_audio"))()
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "My Friend Exclusive",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "That made by my friend yeaaaa",
+    Column = 1,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Hitler's Ziga R15",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/Xe84a99g"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "Condo Emotes R15",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastebin.com/raw/VR08JLdY"))()
+    end,
+}, "INDEX")
+
+local Button = Groupbox:CreateButton({
+    Name = "ANTIBRAINROT_KID TEAM GUI",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+loadstring(game:HttpGet("https://pastefy.app/qx7loyDZ/raw"))() 
+    end,
+}, "INDEX")
+
+local Tab = TabSection:CreateTab({
+    Name = "Genesis FE Scripts",
+    Icon = NebulaIcons:GetIcon('view_in_ar', 'Material'),
+    Columns = 2,
+}, "INDEX")
+
+local Groupbox = Tab:CreateGroupbox({
+    Name = "Genesis FE Scripts",
+    Column = 1,
+}, "INDEX")
+
+local Label = Groupbox:CreateLabel({
+    Name = "You can get it in github: github.com/GenesisFE/Genesis/tree/main/Loadstrings"
+}, "INDEX")
+
+local Label = Groupbox:CreateLabel({
+    Name = "Genesis FE discord: discord.gg/aEZpBEHgMT"
+}, "INDEX")
